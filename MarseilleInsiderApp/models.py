@@ -4,4 +4,4 @@ from django.db import models
 class Loisir(models.Model):
     saison= models.CharField(max_length=255,verbose_name="Saison du loisir")
     nom=models.CharField(max_length=255, verbose_name="Nom du loisir")
-    adresse=models.CharField(max_length=255, verbose_name="Adresse du loisir")
+    adresse_1=models.CharField(max_length=255, verbose_name="Adresse du loisir")
