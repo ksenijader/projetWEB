@@ -26,9 +26,11 @@ body {
         width: 10px;
         margin-bottom: 10px;
         margin-top: 10px;
+
     }
 
     .image-container img{
+
         height: 250px;
         width: 250px;
         object-fit: fill;
@@ -51,12 +53,13 @@ body {
 
     }
     .activity{
+        margin-left: 30px;
         display: flex;
         margin-top: 35px;
         margin-bottom: 1%;
         list-style: none;
         min-height: 270px;
-        width:1350px;
+        width:1405px;
         outline: 1px solid palevioletred;
         outline-offset: 15px ;
         box-sizing: border-box;
