@@ -14,10 +14,7 @@ def vw_activities(request, ):
 
     return render(request, "activitiesloop.html",
                   {"Loisirs":Loisir.objects.all(),"Categories":Catégorie.objects.all()})
-def vw_activities_cat_filter(request, categorie):
+def loop(request,categorie):
     loisirs_list=Loisir.objects.filter(categorie=categorie)
-    return render(request, "activitiesloop.html",{"Loisirs":loisirs_list,"Categories":Catégorie.objects.all()})
-
-def vw_activity(request,id_loisir):
-    loisir=Loisir.objects.get(id_loisir=id_loisir)
-    return render(request,"activities.html",{"loisir":loisir})
+    return render(request,"activitiesloop.html",
+                  {"Loisirs":loisirs_list})
