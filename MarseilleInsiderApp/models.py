@@ -13,7 +13,7 @@ class Catégorie(models.Model):
         ('AC', 'Arts et culture'),
         ('NA', 'Nature et plein air'),
         ('BD', 'Bien être et détente'),
-        ('AC', "Ateliers créatifs"),
+        ('ACR', "Ateliers créatifs"),
         ('EC', "En couple"),
         ('EF', "En famille"),
     ]
@@ -37,6 +37,7 @@ class Loisir(models.Model):
         ('HIVER', 'Hiver'),
         ('AUTOMNE', 'Automne'),
         ('PRINTEMPS', 'Printemps'),
+        ('TA','Toutes saisons')
     ]
 
     id_loisir = models.AutoField(primary_key=True)
@@ -50,6 +51,7 @@ class Loisir(models.Model):
     prix_fournisseur = models.ForeignKey(Prix, on_delete=models.CASCADE)
     saisons = models.CharField(max_length=10, choices=SAISON_CHOICES, verbose_name="Saison")
     description=models.TextField(verbose_name="Description du loisir")
+
 
 
 # Validation functions
