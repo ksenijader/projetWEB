@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités à Marseille</title>
+    <link rel="stylesheet" href="{% static 'css/design.css' %}">
+    <script src="{% static 'js/slideshow.js' %}"></script>
+</head>
+    <head>
+    <link rel="stylesheet" href="{% static "css/my.css" %}">
+    <body>
+    <h1> Activités</h1>
+    <ul>
+        {% for activity in qctivities %}
+        <li><a href="{% url 'qctivitiesloop' book.book_id %}">Title: {{ book.title }}</a>; Author: {{ book.author }}; Description : {{ book.description }};</li>
+        {% endfor %}
+    </ul>
+    </body>

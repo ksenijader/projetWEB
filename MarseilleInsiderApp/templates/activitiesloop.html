@@ -1,0 +1,40 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/design.css' %}">
+</head>
+<body>
+    <header>
+        <div class="information">
+            <a href="#">About us</a>
+            <a href="#">Avis</a>
+            <a href="#">Contact</a>
+            <a href="#">Login</a>
+        </div>
+    </header>
+<h1>Activities</h1>
+    <div class="dropdown">
+        <button class="dropbtn">Choisir la categorie</button>
+        <div class="dropdown-content">
+        <ul>
+              <li>{% for categorie in Categories %}
+                      <a href="#">{{ categorie.get_categorie_display }}</a>
+                  </li>
+            {% endfor %}
+
+        </ul>
+        </div>
+    </div>
+<ul>
+    {% for loisir in Loisirs %}
+    <li><h1>{{ loisir.nom_loisir }}</h1>
+        <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg">
+        <h2>{{ loisir.num_voie }} {{ loisir.name_voie }}, {{ loisir.code_postal }} {{ loisir.ville }}</h2>
+        <p>{{ loisir.categorie.get_categorie_display}}</p>
+        <p>{{ loisir.description }}</p>
+        <p>{{ loisir.saison }}</p>
+        <p>{{ loisir.prix_fournisseur.prix_fournisseur }}</p></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

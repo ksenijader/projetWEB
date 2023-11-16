@@ -18,14 +18,14 @@
             <a href="#">Login</a>
         </div>
         <div class="description">
-        <h1 >Marseille Insider</h1> 
-        <p>Explorez les meilleures activités à faire dans la magnifique ville de Marseille.</p> 
-        <a href="#activites" class="cta-button">Voir les Activités</a>
+        <h1 >{{ title }}</h1>
+        <p>{{ description }}</p>
+        <a href="/activities" class="cta-button">{{ button }}</a>
         </div>
     </header>
 
     <section id="activites">
-        <h2>Nos Activités Recommandées</h2>
+        <h2>{{ block_description }}</h2>
         <div class="activity">
            <!-- Slideshow container -->
 <div class="slideshow-container">
