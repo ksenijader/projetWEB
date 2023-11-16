@@ -20,6 +20,7 @@ class Catégorie(models.Model):
     categorie = models.CharField(max_length=50, choices=CATEGORIES_CHOICES, primary_key=True)
 
 
+
 class Fournisseur(models.Model):
     EXCLUSIVITY_CHOICES = [
         ('OUI', 'Oui'),
@@ -127,3 +128,6 @@ class AcheteLoisir(models.Model):  # Renamed to follow Python conventions
     id_loisir = models.ForeignKey(Loisir, on_delete=models.CASCADE)
     prix_client = models.ForeignKey(Client, on_delete=models.CASCADE)
 
+class Contient(models.Model):
+    id_loisir=models.ForeignKey(Loisir, on_delete=models.CASCADE)
+    id_pack=models.ForeignKey(Pack, on_delete=models.CASCADE)
