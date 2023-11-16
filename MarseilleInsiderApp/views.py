@@ -18,3 +18,17 @@ def loop(request,categorie):
     loisirs_list=Loisir.objects.filter(categorie=categorie)
     return render(request,"activitiesloop.html",
                   {"Loisirs":loisirs_list})
+
+from django.shortcuts import render, redirect
+from .forms import InscriptionForm
+
+def inscription(request):
+    if request.method == 'POST':
+        form = InscriptionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accueil')  # Rediriger vers la page d'accueil après l'inscription
+    else:
+        form = InscriptionForm()
+
+    return render(request, 'inscription.html', {'form': form})
