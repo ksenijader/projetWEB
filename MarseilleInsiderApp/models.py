@@ -7,6 +7,7 @@ class Prix(models.Model):
     prix_fournisseur = models.IntegerField(verbose_name="Prix fournisseur")
 
 
+
 class Catégorie(models.Model):
     CATEGORIES_CHOICES = [
         ('GA', 'Gastronomie'),
@@ -109,18 +110,15 @@ class Client(models.Model):
 class Pack(models.Model):
     id_pack = models.AutoField(primary_key=True)
     nom_pack = models.CharField(max_length=10, verbose_name="Nom du pack")
-    nombre_loisirs = models.IntegerField(validators=[validate_nombre_format])
+    nombre_loisirs = models.IntegerField(validators=[validate_nombre_format], verbose_name="Nombre")
     description = models.TextField(verbose_name="Description du loisir")
 
 
 class AchetePack(models.Model):
     date_achat_pack = models.DateField(verbose_name="Date d'achat du pack")
     id_pack = models.ForeignKey(Pack, on_delete=models.CASCADE)
-    prix_client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    nombre = models.IntegerField(
-        verbose_name="Nombre",
-        validators=[validate_nombre_format]
-    )
+    prix_client = models.ForeignKey(Prix, on_delete=models.CASCADE)
+
 
 
 class AcheteLoisir(models.Model):  # Renamed to follow Python conventions
