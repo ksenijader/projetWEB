@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 
+
 class Prix(models.Model):
     id_prix = models.AutoField(primary_key=True)
     prix_fournisseur = models.IntegerField(verbose_name="Prix fournisseur")
@@ -105,6 +106,13 @@ class Client(models.Model):
                                        unique=True,
                                        help_text="Le mot de passe doit contenir au moins 1 majuscule, 1 chiffre et 1 caratère spécial"
                                        )
+
+    def check_password(self, mdp):
+        if self.mdp_utilisateur == mdp:
+            return self
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    last_login = models.DateTimeField(auto_now=True)
 
 
 class Pack(models.Model):
