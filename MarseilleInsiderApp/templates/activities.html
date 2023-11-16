@@ -1,21 +1,27 @@
 {% load static %}
-<!DOCTYPE html>
-
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activités à Marseille</title>
-    <link rel="stylesheet" href="{% static 'css/design.css' %}">
-    <script src="{% static 'js/slideshow.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/activitiesdesign.css' %}">
 </head>
-    <head>
-    <link rel="stylesheet" href="{% static "css/my.css" %}">
-    <body>
-    <h1> Activités</h1>
-    <ul>
-        {% for activity in qctivities %}
-        <li><a href="{% url 'qctivitiesloop' book.book_id %}">Title: {{ book.title }}</a>; Author: {{ book.author }}; Description : {{ book.description }};</li>
-        {% endfor %}
-    </ul>
-    </body>
+<body>
+    <header>
+        <div class="information">
+            <a href="#">About us</a>
+            <a href="#">Avis</a>
+            <a href="#">Contact</a>
+            <a href="#">Login</a>
+        </div>
+    </header>
+
+ <h1>{{ loisir.nom_loisir }}</h1>
+    <div class="activity">
+    <div class="image-container">
+        <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg"></div>
+        <h2>{{ loisir.description }}</h2>
+        <p>{{ loisir.categorie.get_categorie_display}}</p>
+        <p>{{ loisir.num_voie }} {{ loisir.name_voie }}, {{ loisir.code_postal }} {{ loisir.ville }}</p>
+        <p>{{ loisir.saison }}</p>
+        <p>{{ loisir.prix_fournisseur.prix_fournisseur }}</p>
+        </div>
+</body>
+</html>

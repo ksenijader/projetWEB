@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from MarseilleInsiderApp.views import vw_home,vw_activities
+from MarseilleInsiderApp.views import vw_home,vw_activities,vw_activities_cat_filter,vw_activity
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',vw_home),
     path('activities/',vw_activities),
+    path('activities/<str:categorie>/',vw_activities_cat_filter),
+    path('activity/<int:id_loisir>/',vw_activity)
 ]
