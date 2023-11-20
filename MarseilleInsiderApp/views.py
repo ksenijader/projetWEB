@@ -48,3 +48,17 @@ def inscription(request):
 
     return render(request, 'inscription_page.html', {'form': form})
 
+def vw_activity(request, id_loisir):
+    loisir = Loisir.objects.get(pk=id_loisir)
+
+    nombre_personnes = int(request.GET.get('nombre_participants', 1))
+
+    prix_total = loisir.calcul_prix_total(nombre_personnes)
+
+    context = {
+        'loisir': loisir,
+        'nombre_personnes': nombre_personnes,
+        'prix_total': prix_total,
+    }
+    return render(request, 'activity_page.html', context)
+

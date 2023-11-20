@@ -48,6 +48,13 @@ class Loisir(models.Model):
     saisons = models.CharField(max_length=10, choices=SAISON_CHOICES, verbose_name="Saison")
     description=models.TextField(verbose_name="Description du loisir")
 
+    def calcul_prix_total(self, nombre_personnes):
+        if isinstance(nombre_personnes, int):
+            prix_total = self.prix_fournisseur.prix_fournisseur * nombre_personnes
+            return prix_total
+        else:
+            return None
+
 def validate_tel_format(numero):
     # Split the address into components
     components = [component.strip() for component in numero.split('.')]
@@ -109,6 +116,14 @@ class Pack(models.Model):
     nom_pack = models.CharField(max_length=10, verbose_name="Nom du pack")
     nombre_loisirs = models.IntegerField(validators=[validate_nombre_format], verbose_name="Nombre")
     description = models.TextField(verbose_name="Description du loisir")
+    prix_pack= models.IntegerField(verbose_name="Prix du pack")
+
+    def prix_du_pack(self):
+
+        loisirs_du_pack = self.contient_set.select_related('id_loisir__prix_fournisseur').all()
+        prix_reduit = sum(loisir.id_loisir.prix_fournisseur.prix_fournisseur * 0.9 for loisir in loisirs_du_pack)
+
+        return prix_reduit
 
 
 class AchetePack(models.Model):

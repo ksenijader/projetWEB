@@ -24,7 +24,7 @@ urlpatterns = [
     path('home/',vw_home),
     path('activities/',vw_activities),
     path('activities/<str:categorie>/',vw_activities_cat_filter),
-    path('activity/<int:id_loisir>/',vw_activity),
+    path('activity/<int:id_loisir>/',vw_activity, name='activity_detail'),
     path('inscription/', inscription, name='inscription'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
