@@ -1,76 +1,68 @@
-/* Ajoutez ces styles à votre fichier CSS existant */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.information {
+    background-color: lavender;
+    height: 40px;
+    text-align: right;
+    align-content: center;
+    vertical-align: middle;
+}
+
+.information a {
+    margin-top: 0%;
+    font-size: 20px;
+    display: inline;
+    vertical-align: middle;
+    color: #333;
+    margin-right: 10px;
+}
+
+
 
 .reservation-container {
     background-color: #fff;
     padding: 20px;
     margin-top: 20px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    text-align: center;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .reservation-container h3 {
     color: #333;
-}
-
-.reservation-container p {
-    color: #666;
-    margin-top: 10px;
-}
-
-.counter-container {
-    display: flex;
-    flex-direction: row; /* Changer la direction en colonne pour aligner les éléments verticalement */
-    align-items: center;
-    margin-bottom: 1px;
-}
-
-.counter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 150px;
-    margin: 0 auto;
-    margin-top: 0; /* Ajustez cette valeur selon vos préférences */
-    margin-bottom: 0;
-}
-
-label {
-    padding-right: 10px;
-}
-
-.counter-button {
-    background-color: palevioletred;
-    color: white;
-    padding: 6px 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#participantsValue {
-    font-size: 16px;
-    padding: 0 10px;
-}
-
-/* Nouveaux styles pour aligner horizontalement les conteneurs de date et de participants */
-.date-container,
-.counter-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 20px;
     margin-bottom: 15px;
 }
 
-.date-container input {
+/* Styles pour les champs de réservation */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; /* Aligne les éléments en colonne */
+}
+
+.form-group label {
+    margin-bottom: 5px; /* Espacement entre le label et le contenu en dessous */
+    display: block;
+    font-weight: normal;
+}
+
+.form-group input,
+.form-group select {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
+/* Styles pour les boutons de réservation */
 .reserve-button {
     background-color: palevioletred;
     color: white;
@@ -79,9 +71,85 @@ label {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
 }
 
 .reserve-button:hover {
     background-color: pink;
 }
+
+.date-container,
+.counter-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Espacement entre les conteneurs de date et de compteur */
+}
+
+
+.location-container {
+    display: flex;
+    align-items: center;
+}
+
+.location-container i {
+    margin-right: 5px; /* Ajoutez un espacement à droite de l'icône si nécessaire */
+}
+
+.address {
+    margin: 0; /* Supprimez la marge par défaut pour l'adresse */
+    font-weight: normal;
+}
+/* Styles pour le conteneur de prix */
+.prix-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.prix-container p {
+    /* Taille du texte du prix */
+    margin: 0; /* Supprimer les marges par défaut */
+}
+
+.prix-container h3 {
+    font-size: 18px; /* Appliquer la même taille de police que le texte de l'adresse */
+    margin: 0; /* Supprimer les marges par défaut */
+    font-weight: normal; /* Assurer que la police n'est pas en gras */
+}
+.price-label {
+    margin-left: 5px; /* Ajustez la marge selon vos besoins */
+}
+
+.info-container {
+    display: flex;
+    align-items: center;
+}
+
+.categorie-saison-container {
+    display: flex;
+    align-items: center;
+}
+
+.categorie-container,
+.saison-container {
+    display: flex;
+    align-items: center;
+    margin-right: 5px; /* Ajustez la marge selon vos besoins */
+}
+
+.separator {
+    margin: 0 10px;  /* Ajustez la marge selon vos besoins */
+}
+
+.material-icons {
+    font-size: 20px; /* Ajustez la taille de l'icône selon vos besoins */
+    margin-right: 5px; /* Ajustez l'espacement entre l'icône et le texte */
+}
+
+/* Ajustez la taille du texte selon vos besoins */
+.categorie-container p,
+.saison-container p {
+    font-size: 16px;
+    margin: 0; /* Supprimez la marge par défaut pour le texte */
+}
+

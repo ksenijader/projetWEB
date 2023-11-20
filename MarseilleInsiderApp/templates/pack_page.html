@@ -4,8 +4,8 @@
 {% block page_title %}{{ pack.nom_pack }}{% endblock %}
 
 {% block content %}
-    <div class="pack">
-        <h2>{{ pack.description }}</h2>
-        <p>{{ pack.nombre_loisirs}}</p>
-        </div>
+<h1>{{ pack.nom_pack }}</h1>
+<p>{{ pack.description }}</p>
+<p>Nombre de loisirs dans le pack : {{ pack.nombre_loisirs }}</p>
+<p>Prix du pack (avec réduction de 10%) : {{ pack.prix_du_pack }}</p>
 {% endblock %}

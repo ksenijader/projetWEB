@@ -5,57 +5,94 @@
 
 {% block content %}
     <div class="activity">
-    <div class="image-container">
-        <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg"></div>
-        <h2>{{ loisir.description }}</h2>
-        <p>{{ loisir.categorie.get_categorie_display}}</p>
-        <p>{{ loisir.num_voie }} {{ loisir.nom_voie }}, {{ loisir.code_postal }} {{ loisir.ville }}</p>
-        <p>{{ loisir.saison }}</p>
-        <p>{{ loisir.prix_fournisseur.prix_fournisseur }}</p>
+        <div class="image-container">
+            <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg">
         </div>
 
-   <div class="reservation-container">
+
+        <h4>à propos</h4>
+        <h4>{{ loisir.description }}</h4>
+        <div class="location-container">
+            <i class="material-icons">location_on</i>
+            <p class="address">
+                {{ loisir.num_voie }} {{ loisir.nom_voie }}, {{ loisir.code_postal }} {{ loisir.ville }}
+            </p>
+        </div>
+
+        <div class="info-container">
+            <div class="categorie-saison-container">
+                <div class="categorie-container">
+                    <span class="material-icons">info</span>
+                    <p>{{ loisir.categorie.get_categorie_display }}</p>
+                </div>
+                <div class="separator">-</div>
+                <div class="saison-container">
+                    <p>{{ loisir.get_saisons_display }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="prix-container">
+        <span class="material-icons">euro</span>
+            <p>{{ loisir.prix_fournisseur.prix_fournisseur }}</p><h4 class="address"> /par personne</h4>
+        </div>
+
+
+    <div class="reservation-container">
         <h3>Réservez votre place</h3>
 
         <div class="counter-container">
             <div class="counter">
                 <label for="reservationDate">Date :</label>
-                <input type="date" id="reservationDate" name="reservationDate" value="2023-11-22" min="2023-11-22" max="2024-12-31">
+                <input type="date" id="reservationDate" name="reservationDate"  min="2023-11-22" max="2024-12-31">
             </div>
         </div>
 
-        <div class="counter-container">
-            <p>Nombre de participants :</p>
+        <div class="form-group">
+            <label for="participantsValue">Nombre de participants :</label>
             <div class="counter">
                 <button class="counter-button" id="decreaseParticipants">-</button>
-                <span id="participantsValue">5</span>
+                <span id="participantsValue">{{ nombre_personnes }}</span>
                 <button class="counter-button" id="increaseParticipants">+</button>
             </div>
         </div>
 
+        <!-- Dans votre HTML -->
+        <p class="prix-total">Prix total pour {{ nombre_personnes }} participants : {{ prix_total }}€</p>
+
+
         <button class="reserve-button">Réserver</button>
     </div>
 
-    <!-- Ajout du script JavaScript -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+     document.addEventListener("DOMContentLoaded", function () {
             var participantsValue = document.getElementById("participantsValue");
             var decreaseButton = document.getElementById("decreaseParticipants");
             var increaseButton = document.getElementById("increaseParticipants");
+            var prixTotalElement = document.querySelector(".prix-total");
 
-            decreaseButton.addEventListener("click", function () {
-                var currentValue = parseInt(participantsValue.textContent);
-                if (currentValue > 1) {
-                    participantsValue.textContent = currentValue - 1;
-                }
-            });
+    // Prix unitaire par participant (venant du serveur Django)
+            var prixUnitaire = {{ loisir.prix_fournisseur.prix_fournisseur }};
 
-            increaseButton.addEventListener("click", function () {
+            function updatePrixTotal() {
                 var currentValue = parseInt(participantsValue.textContent);
-                participantsValue.textContent = currentValue + 1;
-            });
+                prixTotalElement.textContent = "Prix total pour " + currentValue + " participants : " + (currentValue * prixUnitaire) + "€";
+            }
+
+        decreaseButton.addEventListener("click", function () {
+            var currentValue = parseInt(participantsValue.textContent);
+            if (currentValue > 1) {
+                participantsValue.textContent = currentValue - 1;
+                updatePrixTotal();
+            }
         });
-    </script>
 
+        increaseButton.addEventListener("click", function () {
+            var currentValue = parseInt(participantsValue.textContent);
+            participantsValue.textContent = currentValue + 1;
+            updatePrixTotal();
+        });
+    });
+     </script>
 
 {% endblock %}

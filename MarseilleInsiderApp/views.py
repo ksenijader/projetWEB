@@ -76,7 +76,23 @@ class CustomPasswordResetView(PasswordResetView):
     def form_valid(self, form):
         # Custom logic to handle the password reset
         # This method is called when the form is successfully submitted
+def vw_activity(request, id_loisir):
+    loisir = Loisir.objects.get(pk=id_loisir)
 
+    nombre_personnes = int(request.GET.get('nombre_participants', 1))
+
+    prix_total = loisir.calcul_prix_total(nombre_personnes)
+
+    context = {
+        'loisir': loisir,
+        'nombre_personnes': nombre_personnes,
+        'prix_total': prix_total,
+    }
+    return render(request, 'activity_page.html', context)
+
+def form_valid(self, form):
+        # Custom logic to handle the password reset
+        # This method is called when the form is successfully submitted
         # You can access the cleaned_data to get the form input
         username = form.cleaned_data['username']
         nouveau_mdp = form.cleaned_data['nouveau_mdp']
