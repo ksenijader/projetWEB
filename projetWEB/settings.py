@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'projetWEB.urls'
@@ -125,10 +126,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = '/home'
+LOGIN_REDIRECT_URL = '/home/'
 # settings.py
 AUTHENTICATION_BACKENDS = [
     'MarseilleInsiderApp.backends.ClientAuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',  # Include the default backend
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'

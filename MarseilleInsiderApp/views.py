@@ -2,6 +2,8 @@ from django.shortcuts import render
 from MarseilleInsiderApp.models import Loisir,Catégorie
 from django.shortcuts import render, redirect
 from .forms import InscriptionForm
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 # Create your views here.
 
@@ -11,7 +13,7 @@ def vw_home(request, ):
     button = "Voir les activités"
     block_description="Nos Activités Recommandées "
     return render(request, "home_page.html",
-                  {"title": title, "description": description, "button": button, "block_description":block_description})
+                  {"title": title, "description": description, "button": button, "block_description":block_description,"user":request.user})
 def vw_activities(request, ):
 
     return render(request, "activitiesloop.html",
@@ -35,3 +37,4 @@ def inscription(request):
         form = InscriptionForm()
 
     return render(request, 'inscription.html', {'form': form})
+

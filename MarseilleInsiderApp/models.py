@@ -81,7 +81,6 @@ def validate_mdp(mdp):
             raise ValidationError("Le mot de passe doit contenir un caract spé")
 
 
-
 class Client(models.Model):
     id_client = models.AutoField(primary_key=True)
     num_voie = models.IntegerField(verbose_name="Numéro de la voie")
@@ -106,6 +105,7 @@ class Client(models.Model):
                                        unique=True,
                                        help_text="Le mot de passe doit contenir au moins 1 majuscule, 1 chiffre et 1 caratère spécial"
                                        )
+    is_authenticated=True
 
     def check_password(self, mdp):
         if self.mdp_utilisateur == mdp:
