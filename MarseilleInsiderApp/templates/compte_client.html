@@ -29,14 +29,14 @@
         <tr>
             <th class="data">Pack <a href="/pack/{{ achat.id_pack.id_pack}}/" >"{{ achat.id_pack.nom_pack }}"</a></th>
         <th class="data"> {{ achat.date_achat_pack }}</th>
-        <th class="data"> {{ achat.prix_client.prix_fournisseur}}€</th>
+        <th class="data"> {{ achat.id_pack.prix_du_pack}} €</th>
         </tr>
         {% endfor %}
         {% for achat in achete_loisir %}
         <tr>
         <th class="data">Loisir <a href="/activity/{{ achat.id_loisir.id_loisir}}/">"{{ achat.id_loisir.nom_loisir }}"</th>
         <th class="data"> {{ achat.date_achat_loisir }}</th>
-        <th class="data"> {{ achat.prix_client.prix_fournisseur}}€</th>
+        <th class="data"> {{ achat.id_loisir.prix_fournisseur.prix_fournisseur}}€</th>
         </tr>
         {% endfor %}
         </table>

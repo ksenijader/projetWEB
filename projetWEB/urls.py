@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from MarseilleInsiderApp.views import vw_home,vw_activities,vw_activities_cat_filter,vw_activity,inscription,vw_packs,vw_pack,compte_client,ClientUpdateView,CustomPasswordResetView
+from MarseilleInsiderApp.views import vw_home,vw_activities,vw_activities_cat_filter,vw_activity,inscription,vw_packs,vw_pack,compte_client,ClientUpdateView,CustomPasswordResetView,acheter_loisir
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',vw_home),
-    path('activities/',vw_activities),
+    path('activities/',vw_activities,name='all_activities'),
     path('activities/<str:categorie>/',vw_activities_cat_filter),
     path('activity/<int:id_loisir>/',vw_activity, name='activity_detail'),
     path('inscription/', inscription, name='inscription'),
@@ -34,4 +34,6 @@ urlpatterns = [
     path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),
     path('compte/',compte_client, name="compte"),
     path('compte/client_update/', ClientUpdateView.as_view(), name='client_update'),
+    path('acheter_loisir/<int:id_loisir>/', acheter_loisir, name='acheter_loisir'),
 ]
+

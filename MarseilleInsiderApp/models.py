@@ -131,15 +131,13 @@ class AchetePack(models.Model):
     date_achat_pack = models.DateField(verbose_name="Date d'achat du pack")
     id_pack = models.ForeignKey(Pack, on_delete=models.CASCADE)
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='achetepack_id')
-    prix_client = models.ForeignKey(Prix, on_delete=models.CASCADE, related_name='achetepack_prix')
 
 
 
 class AcheteLoisir(models.Model):  # Renamed to follow Python conventions
-    date_achat_loisir = models.DateField(verbose_name="Date d'achat du loisir")
+    date_achat_loisir = models.DateField(verbose_name="Date d'achat du loisir",auto_now_add=True)
     id_loisir = models.ForeignKey(Loisir, on_delete=models.CASCADE)
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='acheteloisirs_id')
-    prix_client = models.ForeignKey(Prix, on_delete=models.CASCADE, related_name='acheteloisirs_prix')
 
 
 class Contient(models.Model):

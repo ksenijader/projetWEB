@@ -10,6 +10,7 @@ from django.views.generic.edit import UpdateView
 from .forms import ClientUpdateForm
 from django.contrib.auth.views import PasswordResetView
 from .forms import CustomPasswordResetForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -101,3 +102,15 @@ class CustomPasswordResetView(PasswordResetView):
     def get_success_url(self):
         # Customize the URL to redirect after a successful password reset
         return 'login'  # Customize this URL
+
+@login_required
+def acheter_loisir(request, id_loisir):
+    # Assuming the client is associated with the logged-in user
+    client=Client.objects.get(nom_utilisateur=request.user.nom_utilisateur)  # Adjust this based on your actual setup
+
+    loisir = Loisir.objects.get(id_loisir=id_loisir)
+
+    AcheteLoisir.objects.create(id_client=client, id_loisir=loisir)
+
+    return redirect('all_activities')
+

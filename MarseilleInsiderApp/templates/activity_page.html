@@ -60,8 +60,10 @@
         <!-- Dans votre HTML -->
         <p class="prix-total">Prix total pour {{ nombre_personnes }} participants : {{ prix_total }}€</p>
 
-
-        <button class="reserve-button">Réserver</button>
+        <form method="post" action="{% url 'acheter_loisir' loisir.id_loisir %}">
+            {% csrf_token %}
+        <input type="submit" class="reserve-button" value="Réserver">
+            </form>
     </div>
 
     <script>
