@@ -1,0 +1,61 @@
+{% extends 'base_1.html' %}
+{% load static %}
+
+{% block page_title %}{{ loisir.nom_loisir }}{% endblock %}
+
+{% block content %}
+    <div class="activity">
+    <div class="image-container">
+        <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg"></div>
+        <h2>{{ loisir.description }}</h2>
+        <p>{{ loisir.categorie.get_categorie_display}}</p>
+        <p>{{ loisir.num_voie }} {{ loisir.nom_voie }}, {{ loisir.code_postal }} {{ loisir.ville }}</p>
+        <p>{{ loisir.saison }}</p>
+        <p>{{ loisir.prix_fournisseur.prix_fournisseur }}</p>
+        </div>
+
+   <div class="reservation-container">
+        <h3>Réservez votre place</h3>
+
+        <div class="counter-container">
+            <div class="counter">
+                <label for="reservationDate">Date :</label>
+                <input type="date" id="reservationDate" name="reservationDate" value="2023-11-22" min="2023-11-22" max="2024-12-31">
+            </div>
+        </div>
+
+        <div class="counter-container">
+            <p>Nombre de participants :</p>
+            <div class="counter">
+                <button class="counter-button" id="decreaseParticipants">-</button>
+                <span id="participantsValue">5</span>
+                <button class="counter-button" id="increaseParticipants">+</button>
+            </div>
+        </div>
+
+        <button class="reserve-button">Réserver</button>
+    </div>
+
+    <!-- Ajout du script JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var participantsValue = document.getElementById("participantsValue");
+            var decreaseButton = document.getElementById("decreaseParticipants");
+            var increaseButton = document.getElementById("increaseParticipants");
+
+            decreaseButton.addEventListener("click", function () {
+                var currentValue = parseInt(participantsValue.textContent);
+                if (currentValue > 1) {
+                    participantsValue.textContent = currentValue - 1;
+                }
+            });
+
+            increaseButton.addEventListener("click", function () {
+                var currentValue = parseInt(participantsValue.textContent);
+                participantsValue.textContent = currentValue + 1;
+            });
+        });
+    </script>
+
+
+{% endblock %}

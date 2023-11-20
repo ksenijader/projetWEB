@@ -1,0 +1,87 @@
+/* Ajoutez ces styles à votre fichier CSS existant */
+
+.reservation-container {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.reservation-container h3 {
+    color: #333;
+}
+
+.reservation-container p {
+    color: #666;
+    margin-top: 10px;
+}
+
+.counter-container {
+    display: flex;
+    flex-direction: row; /* Changer la direction en colonne pour aligner les éléments verticalement */
+    align-items: center;
+    margin-bottom: 1px;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 150px;
+    margin: 0 auto;
+    margin-top: 0; /* Ajustez cette valeur selon vos préférences */
+    margin-bottom: 0;
+}
+
+label {
+    padding-right: 10px;
+}
+
+.counter-button {
+    background-color: palevioletred;
+    color: white;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#participantsValue {
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+/* Nouveaux styles pour aligner horizontalement les conteneurs de date et de participants */
+.date-container,
+.counter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.date-container input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.reserve-button {
+    background-color: palevioletred;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.reserve-button:hover {
+    background-color: pink;
+}

@@ -1,13 +1,9 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-
-
 class Prix(models.Model):
     id_prix = models.AutoField(primary_key=True)
     prix_fournisseur = models.IntegerField(verbose_name="Prix fournisseur")
-
-
 
 class Catégorie(models.Model):
     CATEGORIES_CHOICES = [
@@ -21,14 +17,11 @@ class Catégorie(models.Model):
     ]
     categorie = models.CharField(max_length=50, choices=CATEGORIES_CHOICES, primary_key=True)
 
-
-
 class Fournisseur(models.Model):
     EXCLUSIVITY_CHOICES = [
         ('OUI', 'Oui'),
         ('NON', 'Non'),
     ]
-
     id_fournisseur = models.AutoField(primary_key=True)
     nom_fournisseur = models.CharField(max_length=50, verbose_name="Nom du fournisseur")
     exclusivite = models.CharField(max_length=7, choices=EXCLUSIVITY_CHOICES, verbose_name="Titre exclusif")
@@ -46,7 +39,7 @@ class Loisir(models.Model):
     id_loisir = models.AutoField(primary_key=True)
     nom_loisir = models.CharField(max_length=255, verbose_name="Nom du loisir")
     num_voie = models.IntegerField(verbose_name="Numéro de la voie")
-    name_voie = models.CharField(max_length=50, verbose_name="Nom de la voie")
+    nom_voie = models.CharField(max_length=50, verbose_name="Nom de la voie")
     code_postal = models.IntegerField(verbose_name="Code postale")
     ville = models.CharField(max_length=50, verbose_name="Ville")
     categorie = models.ForeignKey(Catégorie, on_delete=models.CASCADE)
@@ -54,10 +47,6 @@ class Loisir(models.Model):
     prix_fournisseur = models.ForeignKey(Prix, on_delete=models.CASCADE)
     saisons = models.CharField(max_length=10, choices=SAISON_CHOICES, verbose_name="Saison")
     description=models.TextField(verbose_name="Description du loisir")
-
-
-
-# Validation functions
 
 def validate_tel_format(numero):
     # Split the address into components

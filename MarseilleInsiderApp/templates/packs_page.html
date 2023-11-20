@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}Pack{% endblock %}
+
+{% block content %}
+
+    {% for pack in Pack %}
+        <div class="activity">
+            <div class="image-container">
+                <img src="{% static 'images/loisirs/'%}{{pack.id_pack}}.jpeg">
+            </div>
+            <h1>{{ pack.nom_pack }}</h1>
+            <h2>{{ pack.description }}</h2>
+            <div class="button-container">
+                <a href="/pack/{{ pack.id_pack }}/" class="activity-button">Découvrir</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

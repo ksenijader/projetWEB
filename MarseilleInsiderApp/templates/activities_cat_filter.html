@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}Activities{% endblock %}
+
+{% block content %}
+<div class="dropdown">
+    <button class="dropbtn category-button">Choisir la categorie</button>
+    <div class="dropdown-content">
+        <li>
+            {% for categorie in Categories %}
+                <a href="#" class="category-link" data-category="{{ categorie.categorie }}" data-url="/activities/{{ categorie.categorie }}/">{{ categorie.get_categorie_display }}</a>
+            {% endfor %}
+        </li>
+    </div>
+</div>
+
+{% for loisir in Loisirs %}
+    <div class="activity">
+        <li>
+            <div class="image-container">
+                <img src="{% static 'images/loisirs/'%}{{ loisir.id_loisir }}.jpeg">
+            </div>
+            <h1>{{ loisir.nom_loisir }}</h1>
+            <h2>{{ loisir.description }}</h2>
+            <div class="button-container">
+                <a href="/activity/{{ loisir.id_loisir }}/" class="activity-button">Découvrir</a>
+            </div>
+        </li>
+    </div>
+{% endfor %}
+
+<script src="{%  static 'js/script.js' %}"></script>
+
+{% endblock %}

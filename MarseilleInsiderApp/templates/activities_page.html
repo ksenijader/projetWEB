@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}Activities{% endblock %}
+
+{% block content %}
+    <div class="dropdown">
+        <button class="dropbtn">Choisir la categorie</button>
+        <div class="dropdown-content">
+            {% for categorie in Categories %}
+                <li><a href="/activities/{{categorie.categorie}}/">{{ categorie.get_categorie_display }}</a></li>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% for loisir in Loisirs %}
+        <div class="activity">
+            <div class="image-container">
+                <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg">
+            </div>
+            <h1>{{ loisir.nom_loisir }}</h1>
+            <h2>{{ loisir.description }}</h2>
+            <div class="button-container">
+                <a href="/activity/{{ loisir.id_loisir }}/" class="activity-button">Découvrir</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
