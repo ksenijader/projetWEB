@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+<head>
+    {% block head %}
+<link rel="stylesheet" href="{% static 'css/compte.css' %}">
+    {% endblock %} }}
+</head>
+<body>
+{% block content %}
+    <div class="client_data">
+    <h2>Mes informations</h2>
+        <p class="description_data">Nom utilisateur :</p><p> {{ user.nom_utilisateur }}</p>
+        <p class="description_data">Prénom : </p><p>{{ user.prenom_client }}</p>
+        <p class="description_data">Nom : </p><p>{{ user.nom_client }}</p>
+        <p class="description_data">Adresse : </p><p>{{ user.num_voie }} {{ user.name_voie }}, {{ user.code_postal }} {{ user.ville }}</p>
+        <p class="description_data">Téléphone : </p><p>{{ user.tel_client }}</p>
+        <div class=cta-button>
+    <a href="client_update">Modifier</a>
+            </div>
+    </div>
+    <h2>Mes commandes </h2>
+    <table>
+        <tr>
+            <th>Nom produit</th>
+            <th>Date d'achat</th>
+            <th>Prix</th>
+        </tr>
+        {% for achat in achete_pack %}
+        <tr>
+            <th class="data">Pack <a href="/pack/{{ achat.id_pack.id_pack}}/" >"{{ achat.id_pack.nom_pack }}"</a></th>
+        <th class="data"> {{ achat.date_achat_pack }}</th>
+        <th class="data"> {{ achat.prix_client.prix_fournisseur}}€</th>
+        </tr>
+        {% endfor %}
+        {% for achat in achete_loisir %}
+        <tr>
+        <th class="data">Loisir <a href="/activity/{{ achat.id_loisir.id_loisir}}/">"{{ achat.id_loisir.nom_loisir }}"</th>
+        <th class="data"> {{ achat.date_achat_loisir }}</th>
+        <th class="data"> {{ achat.prix_client.prix_fournisseur}}€</th>
+        </tr>
+        {% endfor %}
+        </table>
+{% endblock %}
+</body>

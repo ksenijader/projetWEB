@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    }
+.login_data{
+    background-color: white;
+    text-align: center;
+    align-self: center;
+    box-sizing: border-box;
+    outline: 1px solid palevioletred;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 10px;
+    opacity: 0.9;
+
+}
+.login_data p span:before { content: ' '; display: block; }
+.login_data h2{
+    margin-top: 40px;
+    padding: 20px;
+}
+.login_data p{
+    padding: 0;
+    margin-left: 0;
+    margin-right: 50%;
+}
+.login_data table{
+    text-align: center;
+}
+.login_data p span {
+    color: #999;
+    font-style: italic;
+}
+form{
+    margin-left: 35% ;
+    text-align: center;
+}
+.username {
+    padding: 20px;
+    margin-top: 10px;
+}
+.password{
+    margin-top: 10px;
+}
+
+input[type=submit]{
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* This makes the button a block element */
+    background-color: transparent;
+    border: 1px solid palevioletred;
+    box-sizing: border-box;
+    color: black;
+    font-family: "Avenir Next LT W01 Bold",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    padding: 16px 23px;
+    position: relative;
+}
+
+.submitbtn{
+    margin-right: 50%;
+    margin-top: 10px;
+}
+.other_options p{
+    text-align: center;
+    margin-right: 0;
+}
+.other_options a{
+    display: inline-block;
+    color: black;
+}

@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="{% static 'css/activitiesdesign.css' %}">
+    {% block head %}{% endblock %}
 </head>
 <body>
     <header>
@@ -9,12 +10,21 @@
             <a href="#">About us</a>
             <a href="#">Avis</a>
             <a href="#">Contact</a>
-            <a href="#">Login</a>
             {% if user.is_authenticated %}
-            <a href="#"> {{user.nom_utilisateur }} </a>
+                <div class = "dropdown-client">
+                <div class="dropbtn-client">
+            <a href="#"> {{user.nom_utilisateur }} </a></div>
+                <div class="dropdown-content-client">
+                    <li>
+                        <a href="{% url 'compte' %}">Compte</a>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </div>
+                </div>
             {% else %}
                 <a href="{% url 'login' %}">Login</a>
             {% endif %}
+
         </div>
     </header>
     <h1>{% block page_title %}{% endblock %}</h1>

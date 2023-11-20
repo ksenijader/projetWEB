@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from MarseilleInsiderApp.views import vw_home,vw_activities,vw_activities_cat_filter,vw_activity,inscription,vw_packs,vw_pack
+from MarseilleInsiderApp.views import vw_home,vw_activities,vw_activities_cat_filter,vw_activity,inscription,vw_packs,vw_pack,compte_client,ClientUpdateView,CustomPasswordResetView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +30,8 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('packs/',vw_packs),
-    path('pack/<int:id_pack>/',vw_pack)
+    path('pack/<int:id_pack>/',vw_pack),
+    path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),
+    path('compte/',compte_client, name="compte"),
+    path('compte/client_update/', ClientUpdateView.as_view(), name='client_update'),
 ]

@@ -1,9 +1,15 @@
 from django.shortcuts import render
-from MarseilleInsiderApp.models import Loisir,Catégorie,Pack
+from MarseilleInsiderApp.models import Loisir,Catégorie,Pack,Client,AchetePack,AcheteLoisir
 from django.shortcuts import render, redirect
 from .forms import InscriptionForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
+from .forms import ClientUpdateForm
+from django.contrib.auth.views import PasswordResetView
+from .forms import CustomPasswordResetForm
 
 # Create your views here.
 
@@ -48,3 +54,37 @@ def inscription(request):
 
     return render(request, 'inscription_page.html', {'form': form})
 
+def compte_client(request):
+     client=Client.objects.get(nom_utilisateur=request.user.nom_utilisateur)
+     achete_pack=AchetePack.objects.filter(id_client=request.user.id_client)
+     achete_loisir=AcheteLoisir.objects.filter(id_client=request.user.id_client)
+     return render(request,'compte_client.html',{"user":client,"achete_pack":achete_pack,"achete_loisir":achete_loisir})
+
+class ClientUpdateView(LoginRequiredMixin, UpdateView):
+    model = Client
+    form_class = ClientUpdateForm
+    template_name = 'client_update.html'
+    success_url = reverse_lazy('compte')  # Replace with the URL where the user should be redirected after a successful update
+    def get_object(self, queryset=None):
+        return self.request.user
+
+class CustomPasswordResetView(PasswordResetView):
+    form_class = CustomPasswordResetForm
+    template_name = 'registration/password_reset.html'  # Customize this template path
+
+
+    def form_valid(self, form):
+        # Custom logic to handle the password reset
+        # This method is called when the form is successfully submitted
+
+        # You can access the cleaned_data to get the form input
+        username = form.cleaned_data['username']
+        nouveau_mdp = form.cleaned_data['nouveau_mdp']
+        confirmer_mdp = form.cleaned_data['confirmer_mdp']
+
+        # Continue with the default behavior by calling the super method
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Customize the URL to redirect after a successful password reset
+        return 'login'  # Customize this URL

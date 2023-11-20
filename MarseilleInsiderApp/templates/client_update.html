@@ -1,0 +1,18 @@
+
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+{% block content %}<div class="login_data">
+  <h2>Update Client Information</h2>
+  <form method="post" action="{% url 'client_update' %}">
+    {% csrf_token %}
+    {{ form.as_p }}<br>
+    <div class="submitbtn">
+    <input type="submit" value="Sauvegarder"><br>
+    </div>
+  </form>
+  </div>
+{% endblock %}
+</body>
