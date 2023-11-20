@@ -68,14 +68,9 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
-class CustomPasswordResetView(PasswordResetView):
-    form_class = CustomPasswordResetForm
-    template_name = 'registration/password_reset.html'  # Customize this template path
 
 
-    def form_valid(self, form):
-        # Custom logic to handle the password reset
-        # This method is called when the form is successfully submitted
+
 def vw_activity(request, id_loisir):
     loisir = Loisir.objects.get(pk=id_loisir)
 
@@ -89,8 +84,10 @@ def vw_activity(request, id_loisir):
         'prix_total': prix_total,
     }
     return render(request, 'activity_page.html', context)
-
-def form_valid(self, form):
+class CustomPasswordResetView(PasswordResetView):
+    form_class = CustomPasswordResetForm
+    template_name = 'registration/password_reset.html'  # Customize this template path
+    def form_valid(self, form):
         # Custom logic to handle the password reset
         # This method is called when the form is successfully submitted
         # You can access the cleaned_data to get the form input
