@@ -1,70 +1,69 @@
 {% extends 'base_1.html' %}
 {% load static %}
 
+
+
+
 {% block page_title %}{{ loisir.nom_loisir }}{% endblock %}
 
 {% block content %}
-    <div class="activity">
-        <div class="image-container">
-            <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg">
+        <div class="slideshow-container">
+
+        <div class="mySlides fade" style="display: block;">
+        <div class="numbertext">1 / 3</div>
+        <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg" style="width:100%">
+        <div class="text">Caption Text</div>
         </div>
 
-
-        <h4>à propos</h4>
-        <h4>{{ loisir.description }}</h4>
-        <div class="location-container">
-            <i class="material-icons">location_on</i>
-            <p class="address">
-                {{ loisir.num_voie }} {{ loisir.nom_voie }}, {{ loisir.code_postal }} {{ loisir.ville }}
-            </p>
+        <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="{% static 'images/m' %}" style="width:100%">
+        <div class="text">Caption Two</div>
         </div>
 
-        <div class="info-container">
-            <div class="categorie-saison-container">
-                <div class="categorie-container">
-                    <span class="material-icons">info</span>
-                    <p>{{ loisir.categorie.get_categorie_display }}</p>
-                </div>
-                <div class="separator">-</div>
-                <div class="saison-container">
-                    <p>{{ loisir.get_saisons_display }}</p>
-                </div>
-            </div>
+        <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="{% static 'images/calanques.jpeg' %}" style="width:100%">
+        <div class="text">Caption Three</div>
         </div>
 
-        <div class="prix-container">
-        <span class="material-icons">euro</span>
-            <p>{{ loisir.prix_fournisseur.prix_fournisseur }}</p><h4 class="address"> /par personne</h4>
+    <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+
+  <!-- The dots/circles -->
+        <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
         </div>
 
+        <div class="activity_data">
+        <p class="description_activity">À propos :</p><p> {{ loisir.description }}</p>
+        <i class="material-icons">location_on</i>
+        <p class="description_activity">{{ loisir.num_voie }} {{ loisir.nom_voie }}, {{ loisir.code_postal }} {{ loisir.ville }}</p>
 
-    <div class="reservation-container">
+        <i class="material-icons">info</i>
+        <p class="description_activity">{{ loisir.categorie.get_categorie_display }} - {{ loisir.get_saisons_display }}</p>
+        <p></p>
+
+
+        <div class="reservation-container">
         <h3>Réservez votre place</h3>
-
-        <div class="counter-container">
-            <div class="counter">
-                <label for="reservationDate">Date :</label>
-                <input type="date" id="reservationDate" name="reservationDate"  min="2023-11-22" max="2024-12-31">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="participantsValue">Nombre de participants :</label>
-            <div class="counter">
-                <button class="counter-button" id="decreaseParticipants">-</button>
-                <span id="participantsValue">{{ nombre_personnes }}</span>
-                <button class="counter-button" id="increaseParticipants">+</button>
-            </div>
-        </div>
-
-        <!-- Dans votre HTML -->
+        <label for="reservationDate">Date :</label>
+        <input type="date" id="reservationDate" name="reservationDate"  min="2023-11-22" max="2024-12-31">
+        <p class="description">Nombre de participants :</p>
+        <button class="counter-button" id="decreaseParticipants">-</button>
+        <span id="participantsValue">{{ nombre_personnes }}</span>
+        <button class="counter-button" id="increaseParticipants">+</button>
         <p class="prix-total">Prix total pour {{ nombre_personnes }} participants : {{ prix_total }}€</p>
-
-        <form method="post" action="{% url 'acheter_loisir' loisir.id_loisir %}">
+         <form method="post" action="{% url 'acheter_loisir' loisir.id_loisir %}">
             {% csrf_token %}
         <input type="submit" class="reserve-button" value="Réserver">
             </form>
-    </div>
+        </div>
 
     <script>
      document.addEventListener("DOMContentLoaded", function () {
@@ -73,7 +72,6 @@
             var increaseButton = document.getElementById("increaseParticipants");
             var prixTotalElement = document.querySelector(".prix-total");
 
-    // Prix unitaire par participant (venant du serveur Django)
             var prixUnitaire = {{ loisir.prix_fournisseur.prix_fournisseur }};
 
             function updatePrixTotal() {
@@ -96,5 +94,37 @@
         });
     });
      </script>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+        showSlides(slideIndex += n);
+        }
+
+// Thumbnail image controls
+        function currentSlide(n) {
+        showSlides(slideIndex = n);
+        }
+
+
+        function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+    </script>
 
 {% endblock %}
