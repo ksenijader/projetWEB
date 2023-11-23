@@ -5,40 +5,44 @@
 
 
 {% block page_title %}{{ loisir.nom_loisir }}{% endblock %}
-
+{% block head %}
+<script src={% static 'js/slideshow.js' %}></script>
+    <script src={% static 'js/price_calculator.js' %}></script>
+{% endblock %}
 {% block content %}
-        <div class="slideshow-container">
+<div class="slideshow-container">
 
-        <div class="mySlides fade" style="display: block;">
-        <div class="numbertext">1 / 3</div>
-        <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg" style="width:100%">
-        <div class="text">Caption Text</div>
-        </div>
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade" style="display: block;">
+      <div class="numbertext">1 / 3</div>
+      <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg" style="width:100%">
+      <div class="text">Caption Text</div>
+    </div>
 
-        <div class="mySlides fade">
-        <div class="numbertext">2 / 3</div>
-        <img src="{% static 'images/m' %}" style="width:100%">
-        <div class="text">Caption Two</div>
-        </div>
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 3</div>
+      <img src="{% static 'images/calanques.jpeg' %}" style="width:100%">
+      <div class="text">Caption Two</div>
+    </div>
 
-        <div class="mySlides fade">
-        <div class="numbertext">3 / 3</div>
-        <img src="{% static 'images/calanques.jpeg' %}" style="width:100%">
-        <div class="text">Caption Three</div>
-        </div>
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 3</div>
+      <img src="{% static 'images/calanques.jpeg' %}" style="width:100%">
+      <div class="text">Caption Three</div>
+    </div>
 
     <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        </div>
-        <br>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  <br>
 
   <!-- The dots/circles -->
-        <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
 
         <div class="activity_data">
         <p class="description_activity">À propos :</p><p> {{ loisir.description }}</p>
@@ -52,10 +56,11 @@
 
         <div class="reservation-container">
         <h3>Réservez votre place</h3>
+            <div id="loisir-data" data-prix-fournisseur="{{ loisir.prix_fournisseur.prix_fournisseur|default_if_none:"0" }}"></div>
         <label for="reservationDate">Date :</label>
         <input type="date" id="reservationDate" name="reservationDate"  min="2023-11-22" max="2024-12-31">
         <p class="description">Nombre de participants :</p>
-        <button class="counter-button" id="decreaseParticipants">-</button>
+        <button class="counter-button" id="decreaseParticipants" onclick="">-</button>
         <span id="participantsValue">{{ nombre_personnes }}</span>
         <button class="counter-button" id="increaseParticipants">+</button>
         <p class="prix-total">Prix total pour {{ nombre_personnes }} participants : {{ prix_total }}€</p>
@@ -64,67 +69,7 @@
         <input type="submit" class="reserve-button" value="Réserver">
             </form>
         </div>
+        </div>
 
-    <script>
-     document.addEventListener("DOMContentLoaded", function () {
-            var participantsValue = document.getElementById("participantsValue");
-            var decreaseButton = document.getElementById("decreaseParticipants");
-            var increaseButton = document.getElementById("increaseParticipants");
-            var prixTotalElement = document.querySelector(".prix-total");
-
-            var prixUnitaire = {{ loisir.prix_fournisseur.prix_fournisseur }};
-
-            function updatePrixTotal() {
-                var currentValue = parseInt(participantsValue.textContent);
-                prixTotalElement.textContent = "Prix total pour " + currentValue + " participants : " + (currentValue * prixUnitaire) + "€";
-            }
-
-        decreaseButton.addEventListener("click", function () {
-            var currentValue = parseInt(participantsValue.textContent);
-            if (currentValue > 1) {
-                participantsValue.textContent = currentValue - 1;
-                updatePrixTotal();
-            }
-        });
-
-        increaseButton.addEventListener("click", function () {
-            var currentValue = parseInt(participantsValue.textContent);
-            participantsValue.textContent = currentValue + 1;
-            updatePrixTotal();
-        });
-    });
-     </script>
-
-    <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        // Next/previous controls
-        function plusSlides(n) {
-        showSlides(slideIndex += n);
-        }
-
-// Thumbnail image controls
-        function currentSlide(n) {
-        showSlides(slideIndex = n);
-        }
-
-
-        function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
-    </script>
 
 {% endblock %}

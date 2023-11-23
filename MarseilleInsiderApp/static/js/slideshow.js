@@ -1,18 +1,22 @@
-let slideIndex = 1;
+
+let slideIndex = 2;
 showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
+  console.log("plusSlides called with", n);
   showSlides(slideIndex += n);
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
+  console.log("currentSlide called with", n);
   showSlides(slideIndex = n);
 }
 
 
 function showSlides(n) {
+  console.log("Script is running on the activity page")
   let i;
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");
