@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
+
 <head>
     {% block head %}
-<link rel="stylesheet" href="{% static 'css/compte.css' %}">
+        <link rel="stylesheet" href="{% static 'css/compte.css' %}">
     {% endblock %} }}
 </head>
 <body>
@@ -36,9 +37,10 @@
         <tr>
         <th class="data">Loisir <a href="/activity/{{ achat.id_loisir.id_loisir}}/">"{{ achat.id_loisir.nom_loisir }}"</th>
         <th class="data"> {{ achat.date_achat_loisir }}</th>
-        <th class="data"> {{ achat.id_loisir.prix_fournisseur.prix_fournisseur}}€</th>
+        <th class="data">Prix total : {{ achat.id_loisir.prix_fournisseur.prix_fournisseur }}€</th>
         </tr>
         {% endfor %}
         </table>
 {% endblock %}
 </body>
+
