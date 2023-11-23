@@ -126,6 +126,14 @@ class Pack(models.Model):
 
         return prix_reduit
 
+    def loisirs_du_pack(self):
+        loisirs_du_pack = self.contient_set.values_list('id_loisir__nom_loisir', flat=True)
+        return list(loisirs_du_pack)
+
+
+
+
+
 
 class AchetePack(models.Model):
     date_achat_pack = models.DateField(verbose_name="Date d'achat du pack")
