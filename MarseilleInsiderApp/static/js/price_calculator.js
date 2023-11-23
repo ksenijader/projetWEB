@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
             var decreaseButton = document.getElementById("decreaseParticipants");
             var increaseButton = document.getElementById("increaseParticipants");
             var prixTotalElement = document.querySelector(".prix-total");
-            var prixUnitaire = parseFloat(document.getElementById('loisir-data').getAttribute('data-prix-fournisseur'));
+            var hiddenNombrePersonnes = document.getElementById("hiddenNombrePersonnes");
+            var prixUnitaire = parseFloat(document.getElementById('price-data').getAttribute('data-prix-fournisseur'));
             function updatePrixTotal() {
                 let currentValue = parseInt(participantsValue.textContent);
                 prixTotalElement.textContent = "Prix total pour " + currentValue + " participants : " + (currentValue * prixUnitaire) + "€";
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (currentValue > 1) {
                 participantsValue.textContent = currentValue - 1;
                 updatePrixTotal();
+                updateHiddenNombrePersonnes()
             }
         });
 
@@ -21,5 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
             var currentValue = parseInt(participantsValue.textContent);
             participantsValue.textContent = currentValue + 1;
             updatePrixTotal();
+            updateHiddenNombrePersonnes()
         });
+            function updateHiddenNombrePersonnes() {
+        hiddenNombrePersonnes.value = participantsValue.textContent;
+    }
     });

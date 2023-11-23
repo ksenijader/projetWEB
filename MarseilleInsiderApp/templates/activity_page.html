@@ -56,7 +56,7 @@
 
         <div class="reservation-container">
         <h3>Réservez votre place</h3>
-            <div id="loisir-data" data-prix-fournisseur="{{ loisir.prix_fournisseur.prix_fournisseur|default_if_none:"0" }}"></div>
+            <div id="price-data" data-prix-fournisseur="{{ loisir.prix_fournisseur.prix_fournisseur|default_if_none:"0" }}"></div>
         <label for="reservationDate">Date :</label>
         <input type="date" id="reservationDate" name="reservationDate"  min="2023-11-22" max="2024-12-31">
         <p class="description">Nombre de participants :</p>
@@ -66,6 +66,7 @@
         <p class="prix-total">Prix total pour {{ nombre_personnes }} participants : {{ prix_total }}€</p>
          <form method="post" action="{% url 'acheter_loisir' loisir.id_loisir %}">
             {% csrf_token %}
+             <input type="hidden" id="hiddenNombrePersonnes" name="nombre_personnes" value="{{ nombre_personnes }}">
         <input type="submit" class="reserve-button" value="Réserver">
             </form>
         </div>

@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.views import PasswordResetView
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from MarseilleInsiderApp.views import vw_home,vw_activities,vw_activities_cat_filter,vw_activity,inscription,vw_packs,vw_pack,compte_client,ClientUpdateView,CustomPasswordResetView,acheter_loisir
+from MarseilleInsiderApp.views import vw_home, vw_activities, vw_activities_cat_filter, vw_activity, inscription, \
+    vw_packs, vw_pack, compte_client, ClientUpdateView, CustomPasswordResetView, acheter_loisir, acheter_pack, success
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,8 +34,11 @@ urlpatterns = [
     path('packs/',vw_packs),
     path('pack/<int:id_pack>/',vw_pack),
     path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/success/',success,name='success'),
     path('compte/',compte_client, name="compte"),
     path('compte/client_update/', ClientUpdateView.as_view(), name='client_update'),
     path('acheter_loisir/<int:id_loisir>/', acheter_loisir, name='acheter_loisir'),
+    path('acheter_pack/<int:id_pack>/', acheter_pack, name='acheter_pack'),
+
 ]
 

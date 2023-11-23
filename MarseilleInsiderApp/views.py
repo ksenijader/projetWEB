@@ -38,7 +38,17 @@ def vw_activities_cat_filter(request, categorie):
 def vw_pack(request,id_pack):
    pack=Pack.objects.get(id_pack=id_pack)
 
-   return render(request, "pack_page.html", {"pack":pack})
+   nombre_personnes = int(request.GET.get('nombre_participants', 1))
+
+   prix_total = pack.calcul_prix_total(nombre_personnes)
+
+   context = {
+       'pack': pack,
+       'nombre_personnes': nombre_personnes,
+       'prix_total': prix_total,
+   }
+   return render(request, 'pack_page.html', context)
+
 def vw_activity(request,id_loisir):
     loisir=Loisir.objects.get(id_loisir=id_loisir)
     return render(request, "activity_page.html", {"loisir":loisir})
@@ -95,22 +105,45 @@ class CustomPasswordResetView(PasswordResetView):
         username = form.cleaned_data['username']
         nouveau_mdp = form.cleaned_data['nouveau_mdp']
         confirmer_mdp = form.cleaned_data['confirmer_mdp']
+        user = Client.objects.get(nom_utilisateur=username)
 
+        # Set the new password for the user
+        user.set_password(nouveau_mdp)
+
+        # Save the user object to persist the password change
+        user.save()
+        response=super().form_valid(form)
         # Continue with the default behavior by calling the super method
-        return super().form_valid(form)
+        return response
+
 
     def get_success_url(self):
         # Customize the URL to redirect after a successful password reset
-        return 'login'  # Customize this URL
+        return 'success'  # Customize this URL
 
 @login_required
 def acheter_loisir(request, id_loisir):
     # Assuming the client is associated with the logged-in user
     client=Client.objects.get(nom_utilisateur=request.user.nom_utilisateur)  # Adjust this based on your actual setup
-
+    nombre_personnes = request.POST.get('nombre_personnes', 1)
     loisir = Loisir.objects.get(id_loisir=id_loisir)
-
-    AcheteLoisir.objects.create(id_client=client, id_loisir=loisir)
+    for n in range(1,int(nombre_personnes)+1):
+        AcheteLoisir.objects.create(id_client=client, id_loisir=loisir)
 
     return redirect('all_activities')
+@login_required
+def acheter_pack(request, id_pack):
+    if request.method == 'POST':
+        # Assuming the client is associated with the logged-in user
+        client=Client.objects.get(nom_utilisateur=request.user.nom_utilisateur)  # Adjust this based on your actual setup
+        nombre_personnes = request.POST.get('nombre_personnes')
+        print(nombre_personnes)
+        pack = Pack.objects.get(id_pack=id_pack)
+        for n in range(int(nombre_personnes)):
+            AchetePack.objects.create(id_client=client, id_pack=pack)
+
+    return redirect('all_activities')
+
+def success(request,):
+    return render(request,"registration/success.html")
 

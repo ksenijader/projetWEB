@@ -1,6 +1,9 @@
 {% extends 'base_1.html' %}
 {% load static %}
-
+{% block head %}
+    <script src={% static 'js/slideshow.js' %}></script>
+    <script src={% static 'js/price_calculator.js' %}></script>
+{% endblock %}
 {% block page_title %}{{ pack.nom_pack }}{% endblock %}
 
 {% block content %}
@@ -50,14 +53,19 @@
 
         <div class="reservation-container">
         <h3>Réservez votre place</h3>
+            <div id="price-data" data-prix-fournisseur="{{ pack.prix_du_pack|default_if_none:"0" }}"></div>
         <label for="reservationDate">Date :</label>
         <input type="date" id="reservationDate" name="reservationDate"  min="2023-11-22" max="2024-12-31">
         <p class="description">Nombre de participants :</p>
         <button class="counter-button" id="decreaseParticipants">-</button>
-        <span id="participantsValue">{{ nombre_personnes }}</span>
+        <span id="participantsValue" name="nombre_personnes">{{ nombre_personnes }}</span>
         <button class="counter-button" id="increaseParticipants">+</button>
         <p class="prix-total">Prix total pour {{ nombre_personnes }} participants : {{ prix_total }}€</p>
-        <input type="submit" class="reserve-button" value="Réserver">
+            <form method="post" action="{% url 'acheter_pack' pack.id_pack %}">
+            {% csrf_token %}
+                <input type="hidden" id="hiddenNombrePersonnes" name="nombre_personnes" value="{{ nombre_personnes }}">
+                <input type="submit" class="reserve-button" value="Réserver">
+            </form>
         </div>
 
 {% endblock %}

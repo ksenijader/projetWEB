@@ -107,9 +107,13 @@ class Client(models.Model):
     def check_password(self, mdp):
         if self.mdp_utilisateur == mdp:
             return self
+    def set_password(self,nouveau_mdp):
+        self.mdp_utilisateur=nouveau_mdp
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     last_login = models.DateTimeField(auto_now=True)
+
 
 
 class Pack(models.Model):
@@ -129,6 +133,13 @@ class Pack(models.Model):
     def loisirs_du_pack(self):
         loisirs_du_pack = self.contient_set.values_list('id_loisir__nom_loisir', flat=True)
         return list(loisirs_du_pack)
+    def calcul_prix_total(self, nombre_personnes):
+        prix_du_pack=self.prix_du_pack()
+        if isinstance(nombre_personnes, int):
+            prix_total = prix_du_pack * nombre_personnes
+            return prix_total
+        else:
+            return None
 
 
 
@@ -136,7 +147,7 @@ class Pack(models.Model):
 
 
 class AchetePack(models.Model):
-    date_achat_pack = models.DateField(verbose_name="Date d'achat du pack")
+    date_achat_pack = models.DateField(verbose_name="Date d'achat du pack",auto_now_add=True)
     id_pack = models.ForeignKey(Pack, on_delete=models.CASCADE)
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='achetepack_id')
 
