@@ -23,7 +23,7 @@ from MarseilleInsiderApp.views import vw_home, vw_activities, vw_activities_cat_
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/',vw_home),
+    path('home/',vw_home, name='accueil'),
     path('activities/',vw_activities,name='all_activities'),
     path('activities/<str:categorie>/',vw_activities_cat_filter),
     path('activity/<int:id_loisir>/',vw_activity, name='activity_detail'),

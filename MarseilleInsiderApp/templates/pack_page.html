@@ -1,71 +1,84 @@
-{% extends 'base_1.html' %}
+{% extends 'base_extension.html' %}
 {% load static %}
+
 {% block head %}
     <script src={% static 'js/slideshow.js' %}></script>
     <script src={% static 'js/price_calculator.js' %}></script>
 {% endblock %}
-{% block page_title %}{{ pack.nom_pack }}{% endblock %}
-
 {% block content %}
-    <div class="slideshow-container">
 
+    <div class="info-reservation-container">
+        <div class="slideshow-container">
+    <!-- Full-width images with number and caption text -->
         <div class="mySlides fade" style="display: block;">
         <div class="numbertext">1 / 3</div>
-        <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg" style="width:100%">
+        <img src="{% static 'images/loisirs/'%}{{loisir.id_loisir}}.jpeg" style="width: 100%; max-width: 600px;">
         <div class="text">Caption Text</div>
-        </div>
+         </div>
 
         <div class="mySlides fade">
         <div class="numbertext">2 / 3</div>
-        <img src="{% static 'images/m' %}" style="width:100%">
+        <img src="{% static 'images/calanques.jpeg' %}" style="width: 100%; max-width: 600px;">
         <div class="text">Caption Two</div>
         </div>
 
         <div class="mySlides fade">
         <div class="numbertext">3 / 3</div>
-        <img src="{% static 'images/calanques.jpeg' %}" style="width:100%">
+        <img src="{% static 'images/calanques.jpeg' %}" style="width: 100%; max-width: 600px;">
         <div class="text">Caption Three</div>
         </div>
 
     <!-- Next and previous buttons -->
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        </div>
-        <br>
+
+
 
   <!-- The dots/circles -->
-        <div style="text-align:center">
+        <div class="dot-container" style="text-align: center; position: relative; margin-top: 10px;">
         <span class="dot" onclick="currentSlide(1)"></span>
         <span class="dot" onclick="currentSlide(2)"></span>
         <span class="dot" onclick="currentSlide(3)"></span>
         </div>
+        </div>
 
+
+     <div class="info-container">
         <div class="activity_data">
-        <p class="description_activity">À propos :</p><p> {{ pack.description }}</p>
+         <h1>{{ pack.nom_pack }}</h1>
+            <h3>{{ pack.prix_du_pack }}€/ par personne</h3>
+            <p class="description_activity"> {{ pack.description }}</p>        <p></p>
+            <p class="description_activity">Dans ce pack vous retrouverez les {{ pack.nombre_loisirs}} activitées suivantes:
+
+    {% for id_loisir, nom_loisir in pack.get_ids_and_noms_activites_du_pack %}
+        <a class="custom-link" href="{% url 'activity_detail' id_loisir=id_loisir %}">{{ nom_loisir }}</a>{% if not forloop.last %}, {% endif %}
+    {% endfor %}
 
 
-        <i class="material-icons">info</i>
-        <p class="description_activity">Nombre de loisirs dans le pack :{{ pack.nombre_loisirs}}</p>
-            <p>Prix du pack (avec réduction de 10%) : {{ pack.prix_du_pack }}</p>
-            <p class="description_activity">Loisirs dans le pack :{{ pack.loisirs_du_pack}}</p>
-        <p></p>
+
+</div>
+</div>
+        </div>
 
 
-        <div class="reservation-container">
+
+
+         <div class="reservation-container">
         <h3>Réservez votre place</h3>
-            <div id="price-data" data-prix-fournisseur="{{ pack.prix_du_pack|default_if_none:"0" }}"></div>
+            <div id="price-data" data-prix-fournisseur="{{ loisir.prix_fournisseur.prix_fournisseur|default_if_none:"0" }}"></div>
         <label for="reservationDate">Date :</label>
         <input type="date" id="reservationDate" name="reservationDate"  min="2023-11-22" max="2024-12-31">
-        <p class="description">Nombre de participants :</p>
-        <button class="counter-button" id="decreaseParticipants">-</button>
-        <span id="participantsValue" name="nombre_personnes">{{ nombre_personnes }}</span>
+        <p class="description">Nombre de participant(s) :</p>
+        <button class="counter-button" id="decreaseParticipants" onclick="">-</button>
+        <span id="participantsValue">{{ nombre_personnes }}</span>
         <button class="counter-button" id="increaseParticipants">+</button>
-        <p class="prix-total">Prix total pour {{ nombre_personnes }} participants : {{ prix_total }}€</p>
-            <form method="post" action="{% url 'acheter_pack' pack.id_pack %}">
+        <p class="prix-total">Prix total pour {{ nombre_personnes }} participant(s) : {{ prix_total }}€</p>
+         <form method="post" action="{% url 'acheter_pack' pack.id_pack %}">
             {% csrf_token %}
-                <input type="hidden" id="hiddenNombrePersonnes" name="nombre_personnes" value="{{ nombre_personnes }}">
-                <input type="submit" class="reserve-button" value="Réserver">
+             <input type="hidden" id="hiddenNombrePersonnes" name="nombre_personnes" value="{{ nombre_personnes }}">
+        <input type="submit" class="reserve-button" value="Réserver">
             </form>
-        </div>
+
+         </div>
 
 {% endblock %}

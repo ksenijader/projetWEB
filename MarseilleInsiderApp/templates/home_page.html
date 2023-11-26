@@ -12,9 +12,9 @@
 <body>
     <header>
         <div class="information">
-            <a href="#">About us</a>
-            <a href="#">Avis</a>
-            <a href="#">Contact</a>
+            <a href="/home">Accueil</a>
+            <a href="/activities">Activitées</a>
+            <a href="/packs">Packs</a>
             {% if user.is_authenticated %}
                 <div class = "dropdown">
                 <div class="dropbtn">
@@ -22,19 +22,18 @@
                 <div class="dropdown-content">
                     <li>
                         <a href="{% url 'compte' %}">Compte</a>
-                        <a href="{% url 'logout' %}">Logout</a>
+                        <a href="{% url 'logout' %}">Déconnexion</a>
                     </li>
                 </div>
                 </div>
             {% else %}
-                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'login' %}">Connexion</a>
             {% endif %}
         </div>
         <div class="description">
         <h1 >{{ title }}</h1>
         <p>{{ description }}</p>
         <a href="/activities" class="cta-button">{{ button }}</a>
-            <a href="/packs" class="cta-button">{{ button1 }}</a>
         </div>
     </header>
 
@@ -76,6 +75,14 @@
     <span class="dot" onclick="currentSlide(3)"></span> 
   </div>
     </section>
+
+        <div class="information_pack">
+            <h2> Découvrez nos packs</h2>
+            <h3>Explorez une session complète en optant pour l'un de nos packs qui vous permettent de participer à plusieurs activités. En prime, bénéficiez d'une remise de 10% pour une expérience encore plus enrichissante ! </h3>
+            <h3>Que vous soyez passionné par les aventures en plein air, les activités artistiques ou les découvertes culinaires, nos packs sont soigneusement conçus pour satisfaire toutes les préférences</h3>
+      <a href="/packs" class="cta-button">{{ button1 }}</a>
+        </div>
+
 
     <footer>
         <p>&copy; 2023 Activités à Marseille</p>

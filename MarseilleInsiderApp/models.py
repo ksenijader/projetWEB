@@ -1,5 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.shortcuts import render
+from django.urls import reverse
+
 
 class Prix(models.Model):
     id_prix = models.AutoField(primary_key=True)
@@ -29,11 +32,11 @@ class Fournisseur(models.Model):
 
 class Loisir(models.Model):
     SAISON_CHOICES = [
-        ('ETE', 'Été'),
-        ('HIVER', 'Hiver'),
-        ('AUTOMNE', 'Automne'),
-        ('PRINTEMPS', 'Printemps'),
-        ('TA','Toutes saisons')
+        ('ETE', 'en Été'),
+        ('HIVER', 'en Hiver'),
+        ('AUTOMNE', 'en Automne'),
+        ('PRINTEMPS', 'au Printemps'),
+        ('TA',"toute l'Année")
     ]
 
     id_loisir = models.AutoField(primary_key=True)
@@ -114,7 +117,8 @@ class Client(models.Model):
     is_staff = models.BooleanField(default=False)
     last_login = models.DateTimeField(auto_now=True)
 
-
+    def get_reviews(self):
+        return self.reviews.all()
 
 class Pack(models.Model):
     id_pack = models.AutoField(primary_key=True)
@@ -132,7 +136,27 @@ class Pack(models.Model):
 
     def loisirs_du_pack(self):
         loisirs_du_pack = self.contient_set.values_list('id_loisir__nom_loisir', flat=True)
-        return list(loisirs_du_pack)
+
+        ids_loisirs = [id_loisir for id_loisir in loisirs_du_pack]
+        return ', '.join(ids_loisirs)
+
+    def get_ids_activites_du_pack(self):
+        return list(self.contient_set.values_list('id_loisir', flat=True))
+
+    def get_ids_and_noms_activites_du_pack(self):
+        ids_activites = self.get_ids_activites_du_pack()
+        id_nom_tuples = []
+
+        for id_loisir in ids_activites:
+            try:
+                loisir = Loisir.objects.get(id_loisir=id_loisir)
+                id_nom_tuples.append((id_loisir, loisir.nom_loisir))
+            except Loisir.DoesNotExist:
+                id_nom_tuples.append((id_loisir, f"Loisir #{id_loisir} non trouvé"))
+
+        return id_nom_tuples
+
+
     def calcul_prix_total(self, nombre_personnes):
         prix_du_pack=self.prix_du_pack()
         if isinstance(nombre_personnes, int):
@@ -140,11 +164,6 @@ class Pack(models.Model):
             return prix_total
         else:
             return None
-
-
-
-
-
 
 class AchetePack(models.Model):
     date_achat_pack = models.DateField(verbose_name="Date d'achat du pack",auto_now_add=True)
@@ -162,3 +181,4 @@ class AcheteLoisir(models.Model):  # Renamed to follow Python conventions
 class Contient(models.Model):
     id_loisir=models.ForeignKey(Loisir, on_delete=models.CASCADE)
     id_pack=models.ForeignKey(Pack, on_delete=models.CASCADE)
+

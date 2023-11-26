@@ -9,7 +9,7 @@
     <header>
         <div class="information">
             <a href="/home">Accueil</a>
-            <a href="/activities">Loisirs</a>
+            <a href="/activities">Activitées</a>
             <a href="/packs">Packs</a>
             {% if user.is_authenticated %}
                 <div class = "dropdown-client">
@@ -18,12 +18,12 @@
                 <div class="dropdown-content-client">
                     <li>
                         <a href="{% url 'compte' %}">Compte</a>
-                        <a href="{% url 'logout' %}">Logout</a>
+                        <a href="{% url 'logout' %}">Déconnexion</a>
                     </li>
                 </div>
                 </div>
             {% else %}
-                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'login' %}">Connexion</a>
             {% endif %}
         </div>
     </header>
