@@ -15,8 +15,6 @@ class Catégorie(models.Model):
         ('NA', 'Nature et plein air'),
         ('BD', 'Bien être et détente'),
         ('ACR', "Ateliers créatifs"),
-        ('EC', "En couple"),
-        ('EF', "En famille"),
     ]
     categorie = models.CharField(max_length=50, choices=CATEGORIES_CHOICES, primary_key=True)
 
@@ -122,7 +120,7 @@ class Client(models.Model):
 
 class Pack(models.Model):
     id_pack = models.AutoField(primary_key=True)
-    nom_pack = models.CharField(max_length=10, verbose_name="Nom du pack")
+    nom_pack = models.CharField(max_length=255, verbose_name="Nom du pack")
     nombre_loisirs = models.IntegerField(validators=[validate_nombre_format], verbose_name="Nombre")
     description = models.TextField(verbose_name="Description du loisir")
     prix_pack= models.IntegerField(verbose_name="Prix du pack")
