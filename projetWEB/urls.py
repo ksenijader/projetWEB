@@ -20,7 +20,6 @@ from django.contrib.auth import views as auth_views
 
 from MarseilleInsiderApp.views import vw_home, vw_activities, vw_activities_cat_filter, vw_activity, inscription, \
     vw_packs, vw_pack, compte_client, ClientUpdateView, CustomPasswordResetView, acheter_loisir, acheter_pack, success
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',vw_home, name='accueil'),
@@ -39,6 +38,8 @@ urlpatterns = [
     path('compte/client_update/', ClientUpdateView.as_view(), name='client_update'),
     path('acheter_loisir/<int:id_loisir>/', acheter_loisir, name='acheter_loisir'),
     path('acheter_pack/<int:id_pack>/', acheter_pack, name='acheter_pack'),
+
+
 
 ]
 

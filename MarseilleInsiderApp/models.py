@@ -157,6 +157,7 @@ class Pack(models.Model):
         return id_nom_tuples
 
 
+
     def calcul_prix_total(self, nombre_personnes):
         prix_du_pack=self.prix_du_pack()
         if isinstance(nombre_personnes, int):

@@ -42,6 +42,11 @@ body {
 
 }
 
+.slide-image {
+        width: 600px;
+        height: 470px;
+        object-fit: cover;
+    }
 
 .prix-total{
     font-size: 18px;

@@ -3,8 +3,10 @@
 
 {% block page_title %}Pack{% endblock %}
 
-{% block content %}
 
+{% block content %}
+    <label for="searchInput">Rechercher :</label>
+    <input type="text" id="searchInput" placeholder="Rechercher...">
     {% for pack in Pack %}
         <div class="activity">
             <div class="image-container">
@@ -18,3 +20,23 @@
         </div>
     {% endfor %}
 {% endblock %}
+
+
+
+  <script>
+        $(function() {
+            var availableLoisirs = [
+                {% for pack in all_packs %}
+                    "{{ pack.nom_pack }}",
+                {% endfor %}
+            ];
+
+            $("#searchInput").autocomplete({
+                source: availableLoisirs,
+                minLength: 2,
+                select: function(event, ui) {
+                    window.location.href = ui.item.url;
+                }
+            });
+        });
+    </script>
