@@ -17,8 +17,10 @@ body {
         font-size: 20px;
         display: inline;
         vertical-align: middle;
-        color: #333;
+        color: #333333;
         margin-right: 10px;
+        margin-left: 2px;
+
     }
 
 
@@ -98,14 +100,22 @@ body {
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
+    max-height: 600px;
   position: relative;
   margin: auto;
+    overflow: hidden;
 }
 
 /* Hide the images by default */
 .mySlides {
   display: none;
 }
+.mySlides .img{
+    width: 100%;
+    height: auto;
+
+}
+
 
 /* Next & previous buttons */
 .prev, .next {
@@ -213,17 +223,20 @@ body {
 
 /* The container <div> - needed to position the dropdown content */
 .dropbtn {
-    background-color: lavender;
+    background-color: transparent;
 }
 .dropdown {
+
   position: relative;
   display: inline-block;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
+        right: 0;
   display: none;
   position: absolute;
+  place-self: self-start;
   background-color: #f1f1f1;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -232,6 +245,7 @@ body {
 
 /* Links inside the dropdown */
 .dropdown-content a {
+
   color: black;
   padding: 12px 16px;
   text-decoration: none;

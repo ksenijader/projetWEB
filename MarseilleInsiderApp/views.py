@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from MarseilleInsiderApp.models import Loisir,Catégorie,Pack,Client,AchetePack,AcheteLoisir
+from MarseilleInsiderApp.models import Loisir,Catégorie,Pack,Client,AchetePack,AcheteLoisir,Contient
 from django.shortcuts import render, redirect
 from .forms import InscriptionForm
 from django.contrib.auth import authenticate, login
@@ -37,6 +37,7 @@ def vw_activities_cat_filter(request, categorie):
 
 def vw_pack(request,id_pack):
    pack=Pack.objects.get(id_pack=id_pack)
+   contient=Contient.objects.filter(id_pack=id_pack)
 
    nombre_personnes = int(request.GET.get('nombre_participants', 1))
 
@@ -44,6 +45,7 @@ def vw_pack(request,id_pack):
 
    context = {
        'pack': pack,
+       'contient':contient,
        'nombre_personnes': nombre_personnes,
        'prix_total': prix_total,
    }
