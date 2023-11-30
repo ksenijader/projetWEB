@@ -176,3 +176,10 @@ def success(request, ):
     return render(request, "registration/success.html")
 
 
+class PackAutocomplete(View):
+    def get(self, request):
+        query = request.GET.get('term', '')
+        packs = Pack.objects.filter(nom_pack__icontains=query)[:100]
+        results = [{'id':pack.id_pack,'label':pack.nom_pack} for pack in packs]
+
+        return JsonResponse(results, safe=False)
