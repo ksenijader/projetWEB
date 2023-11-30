@@ -63,7 +63,7 @@ body {
         margin-left: 30px;
         display: flex;
         margin-top: 35px;
-        margin-bottom: 1%;
+        margin-bottom: 20px;
         list-style: none;
         min-height: 270px;
         width:1405px;
@@ -74,6 +74,7 @@ body {
         flex-direction: column;
         position: relative;
 
+
     }
     .button-container{
         position: absolute;
@@ -83,6 +84,15 @@ body {
         margin-bottom: 10px; /* Adjust the margin as needed */
         z-index: 1; /* Ensure the button is above other elements */
     }
+
+
+     .spacing {
+        margin-bottom: 20px;
+        align-items: center;
+         margin-left: 18px;/* Adjust the margin as needed */
+
+    }
+
     .activity-button {
         background-color: transparent;
         border: 1px solid palevioletred;
@@ -149,6 +159,7 @@ body {
     background-color: transparent;
   position: relative;
   display: inline-block;
+    margin-right: 20px;
 }
 
 /* Dropdown Content (Hidden by Default) */

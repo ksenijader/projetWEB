@@ -183,3 +183,11 @@ class PackAutocomplete(View):
         results = [{'id':pack.id_pack,'label':pack.nom_pack} for pack in packs]
 
         return JsonResponse(results, safe=False)
+
+class LoisirAutocomplete(View):
+    def get(self, request):
+        query = request.GET.get('term', '')
+        loisirs = Loisir.objects.filter(nom_loisir__icontains=query)[:100]
+        results = [{'id':loisir.id_loisir,'label':loisir.nom_loisir} for loisir in loisirs]
+
+        return JsonResponse(results, safe=False)
