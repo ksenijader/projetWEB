@@ -1,0 +1,19 @@
+Notre site est accesible en local en téléchargeant le dossier git. Ensuite il faut ouvrir un terminal et réaliser la commande cd suivi du chemin d'accès au répertoire téléchargé (projetWEB). 
+Il faut ensuite activer un environnement conda où django et python sont installés, puis éxécuter la commande suivante: python manage.py runserver. 
+Ce message va s'afficher: Starting development server at http://127.0.0.1:8000/, il vous suffit alors d'entrer l'url dans votre navigateur web. 
+Notre site est également accessible en ligne (remote) sur le lien suivant: http://ksenijadervanova.pythonanywhere.com. 
+
+Notre site présente les nombreuses activités réalisables à Marseille. 
+Tout au long de la visite de notre site, vous trouverez un 'header' avec des liens vers nos différentes pages: page d'accueil, pages présentant les activités et les packs,
+ainsi que la page de connexion. Si vous n'avez pas encore de compte chez nous, cliquez sur connexion, et vous aurez la possibilité de vous inscrire en suivant le lien "S'inscrire". 
+Si vous êtes déjà inscrit mais vous avez oublié votre mot de passe, il vous suffit de cliquer sur le bouton "mot de passe oublié ?" pour en renouveler un. 
+Une fois connecté, vous avez accès à votre compte personnel où seront visibles vos informations (entrées lors de l'inscription). Vous pouvez modifier ces informations à
+tout moment en cliquant sur "Modifier". Un tableau recensant tous vos achats est aussi affiché avec le nom du produit acheté, la date d'achat ainsi que le prix. 
+Pour effectuer des achats, vous pouvez cliquer sur le bouton activités dans le header pour avoir accès à toutes les activités disponibles. Vous pouvez effectuer un tri par catégorie,
+ou encore rechercher une activité spécifique via la barre de recherche! Si une activité vous intéresse vous pouvez cliquer sur "Découvrir" et vous accederez à la page individuelle de l'activité.
+Celle-ci se compose du nom de l'activité, du prix par personne, d'un descriptif, de l'adresse,de la saison, de quelques photos, ainsi qu'un bloc de réservation dans lequel vous pouvez choisir la date et le nombre de
+partipants pour l'activité. Le calcul du prix total selon le nombre de participants se fait automatiquement et vous est affiché. Une fois que vous avez cliqué sur "réserver", l'achat est ajouté
+sur votre compte. 
+Nous proposons aussi des packs, la page générale est similaire à celle des activités. La page individuelle de chaque pack est composée du nom du pack, du prix par personne (somme des prix des activités avec 10% de remise), 
+d'un discriptif, de quelques photos ainsi que le nom de toutes les activitées contenues dans ce pack avec des liens menant directement à la page individuelle de chacune d'entre elles !      
+Enfin, la page d'accueil présente les activités que nous recommandons (avec des liens vers celles-ci), ainsi que plusieurs boutons permettant d'accéder directement aux activités et packs (voir les activités et voir les packs).
