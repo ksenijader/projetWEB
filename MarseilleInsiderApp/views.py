@@ -191,3 +191,11 @@ class LoisirAutocomplete(View):
         results = [{'id':loisir.id_loisir,'label':loisir.nom_loisir} for loisir in loisirs]
 
         return JsonResponse(results, safe=False)
+class LoisirAutocompleteCategorie(View):
+    def get(self, request,categorie):
+        loisirs_list = Loisir.objects.filter(categorie=categorie)
+        query = request.GET.get('term', '')
+        loisirs = loisirs_list.filter(nom_loisir__icontains=query)[:100]
+        results = [{'id':loisir.id_loisir,'label':loisir.nom_loisir} for loisir in loisirs]
+
+        return JsonResponse(results, safe=False)

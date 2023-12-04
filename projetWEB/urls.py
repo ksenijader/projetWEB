@@ -19,7 +19,9 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
 from MarseilleInsiderApp.views import vw_home, vw_activities, vw_activities_cat_filter, vw_activity, inscription, \
-    vw_packs, vw_pack, compte_client, ClientUpdateView, CustomPasswordResetView, acheter_loisir, acheter_pack, success,PackAutocomplete,LoisirAutocomplete
+    vw_packs, vw_pack, compte_client, ClientUpdateView, CustomPasswordResetView, acheter_loisir, acheter_pack, success, \
+    PackAutocomplete, LoisirAutocomplete, LoisirAutocompleteCategorie
+
 urlpatterns = [
     path('', vw_home, name='accueil'),
     path('admin/', admin.site.urls),
@@ -34,6 +36,7 @@ urlpatterns = [
     path('packs/',vw_packs,name='pack-search'),
     path('autocomplete/', PackAutocomplete.as_view(), name='pack_autocomplete'),
     path('autocompletebis/', LoisirAutocomplete.as_view(), name='pack_autocomplete'),
+    path('autocompletecat/<str:categorie>/', LoisirAutocompleteCategorie.as_view(), name='categorie_autocomplete'),
     path('pack/<int:id_pack>/',vw_pack),
     path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),
     path('password_reset/success/',success,name='success'),
