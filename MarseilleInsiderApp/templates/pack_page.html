@@ -55,7 +55,7 @@
 
          <div class="reservation-container">
         <h3>Réservez votre place</h3>
-            <div id="price-data" data-prix-fournisseur="{{ loisir.prix_fournisseur.prix_fournisseur|default_if_none:"0" }}"></div>
+            <div id="price-data" data-prix-fournisseur="{{ pack.prix_du_pack|default_if_none:"0" }}"></div>
         <label for="reservationDate">Date :</label>
         <input type="date" id="reservationDate" name="reservationDate"  min="2023-11-22" max="2024-12-31">
         <p class="description">Nombre de participant(s) :</p>
