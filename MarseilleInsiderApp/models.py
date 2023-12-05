@@ -73,9 +73,9 @@ def validate_mdp(mdp):
          if not any(char.isupper() for char in mdp):
              raise ValidationError("Le mot de passe doit contenir une majuscule")
          if not any(char.isdigit() for char in mdp):
-            raise ValidationError("Le mot de apsse doit contenir au moins 1 chiffre")
+            raise ValidationError("Le mot de passe doit contenir au moins 1 chiffre")
          if not any(not char.isalnum() for char in mdp):
-            raise ValidationError("Le mot de passe doit contenir un caract spé")
+            raise ValidationError("Le mot de passe doit contenir un caractère spécial")
 
 
 class Client(models.Model):
